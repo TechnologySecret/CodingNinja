@@ -1,0 +1,85 @@
+/*
+Connecting Dots
+Send Feedback
+Gary has a board of size NxM. Each cell in the board is a coloured dot. There exist only 26 colours denoted by uppercase Latin characters (i.e. A,B,...,Z). Now Gary is getting bored and wants to play a game. The key of this game is to find a cycle that contain dots of same colour. Formally, we call a sequence of dots d1, d2, ..., dk a cycle if and only if it meets the following condition:
+1. These k dots are different: if i ≠ j then di is different from dj.
+2. k is at least 4.
+3. All dots belong to the same colour.
+4. For all 1 ≤ i ≤ k - 1: di and di + 1 are adjacent. Also, dk and d1 should also be adjacent. Cells x and y are called adjacent if they share an edge.
+Since Gary is colour blind, he wants your help. Your task is to determine if there exists a cycle on the board.
+Input Format :
+The first line of input contains two space separated integers N and M, where N is number of rows and M is the number of columns of the board. 
+Each of the following N lines contain M characters. Please note that characters are not space separated. Each character is an uppercase Latin letter.
+Output Format :
+Print true if there is a cycle in the board, else print false.
+Constraints :
+2 <= N <= 1000
+2 <= M <= 1000
+Time Limit: 1 second
+Sample Input 1:
+3 4
+AAAA
+ABCA
+AAAA
+Sample Output 1:
+true
+*/
+
+import java.util.*;
+
+public class Solution {
+
+	boolean dfs(String[] board, char color, int i, int j, int si, int sj, int k, boolean[][] visited) {
+		if (i == si && j == sj) {
+			if (k >= 4) {
+				return true;
+			}
+			if (k != 0) {
+				return false;
+			}
+		}
+
+		if (i < 0 || j < 0 || i >= board.length || j >= board[0].length() || board[i].charAt(j) != color
+				|| visited[i][j]) {
+			return false;
+		}
+		visited[i][j] = true;
+
+		boolean up = dfs(board, color, i - 1, j, si, sj, k + 1, visited);
+
+		boolean left = dfs(board, color, i, j - 1, si, sj, k + 1, visited);
+
+		boolean down = dfs(board, color, i + 1, j, si, sj, k + 1, visited);
+
+		boolean right = dfs(board, color, i, j + 1, si, sj, k + 1, visited);
+
+		if (up || left || down || right) {
+			return true;
+		}
+		visited[i][j] = false;
+		return false;
+	}
+
+	boolean helper(String[] board, int n, int m, char color) {
+		boolean[][] visited = new boolean[n][m];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (dfs(board, color, i, j, i, j, 0, visited)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	int solve(String[] board, int n, int m) {
+		for (int i = 0; i < 26; i++) {
+			char color = (char) (i + 'A');
+			if (helper(board, n, m, color)) {
+				return 1;
+			}
+		}
+
+		return 0;
+	}
+}

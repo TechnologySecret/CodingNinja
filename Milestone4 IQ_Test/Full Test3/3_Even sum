@@ -1,0 +1,54 @@
+/**************************
+
+Even sum
+Send Feedback
+We are given an array of length N.We have to remove an element from the array, such that the sum of resultant array is even.
+Find the possible number of ways to convert the array sum even by removing one element from the array.
+Input Format:
+First line contains the integer N denoting the size of the array.
+Next line contains N spaced integers denoting the array elements.
+(Note:All elements are distinct)
+Output Format:
+Print the possible number of ways for even array sum.
+Constraints:
+1 <= N <= 10^7
+-10^9 <= arr[i] <= 10^9
+************************************************************************************************************************/\
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Solution { public static void main (String[] args) {
+        Scanner s= new Scanner(System.in);
+        int N=s.nextInt();
+        int arr[]=new int[N];
+        for(int i=0;i<N;i++)
+        {
+            arr[i]=s.nextInt();
+        }
+        int count_even = 0, count_odd = 0;
+    for(int i = 0; i < N; i++)
+    {
+        if (arr[i] % 2 == 1)
+        {
+            count_odd++;
+        }
+        else
+        {
+            count_even++;
+        }
+    }
+ 
+    if (count_odd % 2 == 1)
+    {
+        System.out.print(count_odd);
+    }
+    else
+    {
+        System.out.print(count_even);
+    }
+    
+    }
+}
+

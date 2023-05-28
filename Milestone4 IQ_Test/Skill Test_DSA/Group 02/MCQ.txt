@@ -1,0 +1,65 @@
+
+01. What Is the o/p of following code
+class Vehicle {
+    int seats;
+    int speed;
+
+    public Vehicle(int seats, int speed) {
+    System.out.print("Vehicle ");
+    this.seats = seats;
+    this.speed = speed;
+    }
+}
+
+class Car extends Vehicle {
+    int id;
+    Car() {
+    System.out.print("Car ");
+    }
+}
+
+class Main {
+    public static void main(String args[]) {
+    Car c = new Car();
+    }        
+}
+
+ANS ::::::::::::::: OPTIONS: .D Complation Error.
+
+
+
+
+Q2 . Find the time complexity
+What will be the runtime complexity of the following function?
+int getans(int n)
+    lv = 1
+    ans=0
+    while(lv * lv <= n)
+        inner_lv = n
+        while(inner_lv > 0)
+            inner_lv- = lv
+        lv++
+        ans++
+
+return ans
+
+ANS ::::::::::::::: OPTIONS: B. 0(n(log *n))
+Solution Description
+T(n) = n + n/2 + n/3 + ... n/sqrt(n) is n(1 + 1/2 + 1/3 + .... 1/sqrt(n)) which is n log sqrt(n) which is O(n log ) 
+
+
+
+
+
+
+Q3. Find the time complexity
+Find the time complexity of following pseudo code:
+func(int n)
+lv=1, an_v=1
+while(lv <= n)
+    an_v++
+    lv+=an_v
+    print(“*”)
+		
+ANS ::::::::::::::: OPTIONS:/// C. 0(1)
+
